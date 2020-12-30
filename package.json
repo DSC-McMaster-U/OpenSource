@@ -1,0 +1,60 @@
+{
+	"name": "open-source",
+	"version": "0.1.0",
+	"private": true,
+	"main": "Electron.js",
+	"dependencies": {
+		"@testing-library/jest-dom": "^5.11.4",
+		"@testing-library/react": "^11.1.0",
+		"@testing-library/user-event": "^12.1.10",
+		"electron-is-dev": "^1.2.0",
+		"react": "^17.0.1",
+		"react-dom": "^17.0.1",
+		"react-scripts": "4.0.1",
+		"web-vitals": "^0.2.4"
+	},
+	"devDependencies": {
+		"electron": "^11.1.1",
+		"electron-builder": "^22.9.1"
+	},
+	"scripts": {
+		"build-react": "react-scripts build",
+		"start-react": "react-scripts start",
+		"sample": "(npm run build-react) & npm run pack",
+		"build": "(npm run build-react) & npm run dist",
+		"pack": "electron-builder --dir",
+		"dist": "electron-builder",
+		"compile": "npm i & npm run build"
+	},
+	"eslintConfig": {
+		"extends": [
+			"react-app",
+			"react-app/jest"
+		]
+	},
+	"browserslist": {
+		"production": [
+			">0.2%",
+			"not dead",
+			"not op_mini all"
+		],
+		"development": [
+			"last 1 chrome version",
+			"last 1 firefox version",
+			"last 1 safari version"
+		]
+	},
+	"build": {
+		"appId": "dsc-os-home",
+		"win": {
+			"target": "nsis",
+			"icon": "./public/favion.ico"
+		},
+		"extends": null,
+		"files": [
+			"**/*",
+			"build/"
+		]
+	},
+	"homepage": "./"
+}
