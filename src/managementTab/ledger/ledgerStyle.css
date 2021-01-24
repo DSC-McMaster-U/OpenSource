@@ -1,0 +1,105 @@
+.ledger{
+    margin: 0 auto;
+    align-items: center;
+    border: 1px solid #efefef;
+    box-shadow:
+    /* The top layer shadow */
+        0 1px 1px rgba(0,0,0,0.15),
+            /* The second layer */
+        0 10px 0 -5px #eee,
+            /* The second layer shadow */
+        0 10px 1px -4px rgba(0,0,0,0.15),
+            /* The third layer */
+        0 20px 0 -10px #eee,
+            /* The third layer shadow */
+        0 20px 1px -9px rgba(0,0,0,0.15);
+    border: 1px solid black;
+    border-radius: 5px
+
+    
+    
+}
+
+.ledgerItem{
+    background-color:white;
+    justify-content: flex-start;
+    align-items: center;
+    padding: 10px 20px 0;
+    width: 100%;
+    font-family: Roboto, sans-serif;
+    font-weight: 100;
+    font-size: 15px;
+    color: #333333;
+    border-radius: 5px;
+    border: 2px solid black;
+    
+    
+}
+
+.ledgerItem:hover{
+    background-color: green;
+
+}
+
+.ledger h1{
+    padding-left: 5px;
+    text-align: left;
+    font: menu;
+    font-weight: bold;
+    font-size: 14px;
+}
+
+.MuiListItem-root:hover{
+    cursor: pointer;
+    border: 4px solid #850044;
+    border-radius: 5px;
+
+}
+
+.MuiListItem-root{
+    border: 3px solid black;
+    
+}
+
+.MuiCollapse-wrapper{
+    background-color: #ECECEC;
+    border: 1px solid black;
+
+}
+
+
+.ledger p{
+    font-size: 12px;
+}
+
+
+
+.addList{
+    width: 300px;
+    display: flex;
+    justify-content:center;
+}
+
+.addListItem{
+    display: flex;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+}
+
+.addListItem:hover{
+    border: 5px solid black;
+}
+
+.MuiButton-outlinedPrimary {
+    color: #850044;
+}
+
+.MuiDialogTitle-root {
+    display: flex;
+    justify-content: center;
+}
+
+.MuiPaper-root{
+    border: 2px solid #850044;;
+}
