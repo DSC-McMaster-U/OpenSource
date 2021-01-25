@@ -23,16 +23,11 @@ import Form from './form'
 import Button from '@material-ui/core/Button';
 
 
-function addItemClicked(){
-  alert("Add Item Clicked")
-}
 
 
 
 
-
-
-
+// Style Variable
 const style={
   display: 'flex',
     textAlign: 'center',
@@ -43,6 +38,7 @@ const style={
 }
 
 
+// Props for Form
 Form.propTypes = {
   onClose: PropTypes.func.isRequired,
   open: PropTypes.bool.isRequired,
@@ -50,7 +46,10 @@ Form.propTypes = {
 };
 
 
-function Example(){
+// Main ledger component
+function Ledger(){
+
+  // Row variables to construct LedgerItem components
   var Row = financesData.map( (item, index) =>{ 
     return <div>
            <LedgerItem items={financesData[index]}/>
@@ -58,54 +57,57 @@ function Example(){
        </div>
   })
 
+  // State variables for open and closing form 
   const [open, setOpen] = React.useState(false);
-    const [selectedValue, setSelectedValue] = React.useState("email");
+  const [selectedValue, setSelectedValue] = React.useState("");
   
-    const handleClickOpen = () => {
-      setOpen(true);
-    };
+  // Function to open form
+  const handleClickOpen = () => {
+    setOpen(true);
+  };
   
-    const handleClose = (value) => {
-      setOpen(false);
-      setSelectedValue(value);
-    };
-
-  
-
-  const togglePop = () => {
-      this.setState({
-        open: this.state.open,
-        seen: !this.state.seen
-      });
+  // Function to close form
+  const handleClose = (value) => {
+    setOpen(false);
+    setSelectedValue(value);
   };
 
-    return (
-            <div style={{textAlign: 'center'}}>
-            <List
-              className="ledger"
-              title="Ledger"
-              style={{
-                  width:'300px',
-                  margin:'auto'
-              }}
-            >
-              <h1 style={{fontSize:'30px',textAlign: 'center'}}>Ledger</h1>
-              {Row}
-              <Button onClick={handleClickOpen}>Add Item  <AddIcon /> </Button>
-            </List>
-            <br></br>
-            <div style={{margin:'0 auto',width:'300px'}}>
-            
-            </div>
-            <Form selectedValue={selectedValue} open={open} onClose={handleClose} />
+  
 
-            <br></br>
-            <br></br>
-            <br></br>
-            <br></br>
+  // Return value for Ledger Component
+  return (
 
-            </div>
-      )
+    // Encompassing Div
+      <div style={{textAlign: 'center'}}>
+      {/* Material-UI List component start */}
+      <List
+        className="ledger"
+        title="Ledger"
+        style={{
+            width:'300px',
+            margin:'auto'
+        }}
+      >
+        {/* Ledger Title */}
+        <h1 style={{fontSize:'30px',textAlign: 'center'}}>Ledger</h1>
+        {/* LedgerItems Components */}
+        {Row}
+        {/* Button that opens form */}
+        <Button onClick={handleClickOpen}>Add Item  <AddIcon /> </Button>
+      </List>
+      <br></br>
+
+      {/* Form for adding items, initially hidden */}
+      <Form selectedValue={selectedValue} open={open} onClose={handleClose} />
+
+      {/* Breaks */}
+      <br></br>
+      <br></br>
+      <br></br>
+      <br></br>
+
+      </div>
+    )
   
 }
-export default Example;
+export default Ledger;

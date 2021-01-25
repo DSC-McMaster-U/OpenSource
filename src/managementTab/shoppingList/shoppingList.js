@@ -1,86 +1,56 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { makeStyles } from '@material-ui/core/styles';
-import ListSubheader from '@material-ui/core/ListSubheader';
 import List from '@material-ui/core/List';
-import ListItem from '@material-ui/core/ListItem';
-import ListItemIcon from '@material-ui/core/ListItemIcon';
-import ListItemText from '@material-ui/core/ListItemText';
-import Collapse from '@material-ui/core/Collapse';
-import InboxIcon from '@material-ui/icons/MoveToInbox';
-import DraftsIcon from '@material-ui/icons/Drafts';
-import SendIcon from '@material-ui/icons/Send';
-import ExpandLess from '@material-ui/icons/ExpandLess';
-import ExpandMore from '@material-ui/icons/ExpandMore';
-import StarBorder from '@material-ui/icons/StarBorder';
 import ShoppingListItem from './shoppingListItem';
-import financesData from '../ledger/dummyData'
-import { FixedSizeList } from 'react-window';
-import IconButton from '@material-ui/core/IconButton';
 import AddIcon from '@material-ui/icons/Add';
 import Divider from '@material-ui/core/Divider';
 import ShoppingListForm from './shoppingForm'
 import shoppingListData from  './dummyData'
 import Button from '@material-ui/core/Button';
 
-function addItemClicked(){
-    alert("Add Item Clicked")
-  }
   
 
   
-  
-  
-  const style={
-    display: 'flex',
-      textAlign: 'center',
-      justifyContent: 'center',
-      alignItems: 'center',
-      border: '1px solid black',
-      paddingLeft: '20px'
-  }
-  
-  
+// Props for Form  
   ShoppingListForm.propTypes = {
     onClose: PropTypes.func.isRequired,
     open: PropTypes.bool.isRequired,
     selectedValue: PropTypes.string.isRequired,
   };
   
-  
-  function Example(){
+  // Main ShoppingList component
+  function ShoppingList(){
     
-
+  // Row variables to construct ShoppingListItem components
     var Row = shoppingListData.map( (item, index) =>{ 
       return <div>
              <ShoppingListItem items={shoppingListData[index]}/>
          <Divider variant="middle" />
          </div>
     })
-    
+    // State variables for open and closing form 
     const [open, setOpen] = React.useState(false);
-      const [selectedValue, setSelectedValue] = React.useState("email");
-    
-      const handleClickOpen = () => {
-        setOpen(true);
-      };
-    
-      const handleClose = (value) => {
-        setOpen(false);
-        setSelectedValue(value);
-      };
-  
-    
-  
-    const togglePop = () => {
-        this.setState({
-          open: this.state.open,
-          seen: !this.state.seen
-        });
+    const [selectedValue, setSelectedValue] = React.useState("email");
+      
+    // Function to open form
+    const handleClickOpen = () => {
+      setOpen(true);
+    };
+
+    // Function to close form
+    const handleClose = (value) => {
+      setOpen(false);
+      setSelectedValue(value);
     };
   
+    
+  
+    
+    // Return value for ShoppingList Component
       return (
+            // Encompassing Div
               <div style={{textAlign: 'center'}}>
+              {/* Material-UI List component start */}
               <List
                 className="shoppingList"
                 style={{
@@ -88,18 +58,22 @@ function addItemClicked(){
                     margin:'auto'
                 }}
               >
+                {/* ShoppingList Title */}              
                 <h1 style={{fontSize:'30px',textAlign: 'center'}}>Shopping List</h1>
+                
+                {/* ShoppingListItems Components */}
                 {Row}
-
+              
+                {/* Button that opens form */}
                 <Button onClick={handleClickOpen}>Add Item  <AddIcon /> </Button>
               </List>
               <br></br>
-
-              <div style={{margin:'0 auto',width:'300px'}}>
-          
-              </div>
+              
+              {/* Form for adding items, initially hidden */}
               <ShoppingListForm selectedValue={selectedValue} open={open} onClose={handleClose} />
-              <br></br>
+            
+            {/* Breaks */}
+            <br></br>
             <br></br>
             <br></br>
             <br></br>
@@ -107,4 +81,4 @@ function addItemClicked(){
         )
     
   }
-  export default Example;
+  export default ShoppingList;

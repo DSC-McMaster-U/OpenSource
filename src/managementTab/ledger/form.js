@@ -1,29 +1,27 @@
 import React, { useState } from 'react';
-import { spacing } from '@material-ui/system';
 import { makeStyles, useTheme,withStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
 import Grid from '@material-ui/core/Grid';
 import {
     MuiPickersUtilsProvider,
-    KeyboardTimePicker,
     KeyboardDatePicker,
   } from '@material-ui/pickers';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import Dialog from '@material-ui/core/Dialog';
 import DateFnsUtils from '@date-io/date-fns';
 import PropTypes from 'prop-types';
-import MaskedInput from 'react-text-mask';
 import NumberFormat from 'react-number-format';
 import Input from '@material-ui/core/Input';
 import InputLabel from '@material-ui/core/InputLabel';
 import MenuItem from '@material-ui/core/MenuItem';
 import Select from '@material-ui/core/Select';
 import Chip from '@material-ui/core/Chip';
-import ListItemText from '@material-ui/core/ListItemText';
 import FormControl from '@material-ui/core/FormControl';
 import Button from '@material-ui/core/Button';
 import financesData from './dummyData'
 import './ledgerStyle.css'
+
+// Style Variable for Button
 
 const StyledButton = withStyles({
     root: {
@@ -37,6 +35,8 @@ const StyledButton = withStyles({
     }
   })(Button);
 
+
+// Dummy data for user names
 const names = [
     "Ahmed",
     "Mo",
@@ -47,6 +47,7 @@ const names = [
     "Bernie"
   ];
 
+// Style function for userNames
 function getStyles(name, personName, theme) {
 return {
     fontWeight:
@@ -55,6 +56,8 @@ return {
         : theme.typography.fontWeightMedium,
 };
 }
+
+// Style function for form
 const useStyles = makeStyles((theme) => ({
     formControl: {
       margin: theme.spacing(1),
@@ -73,27 +76,23 @@ const useStyles = makeStyles((theme) => ({
     },
   }));
 
+// Style function for picker 
 const multPickerStyle={
     backgroundColor:'#DEDEDE',
     borderRadius:'3px',
     width:"190px",
 }
 
+// Style function for date picker 
 const datePickerStyle={
     backgroundColor:'#DEDEDE',
     borderRadius: '3px',
     padding: '15px',
     width:'170px'
 }
-const style={
-    width:'300px',
-    textAlign: 'center',
-    justifyContent: 'center',
-    alignItems: 'center',
-    border: '1px solid black',
-    paddingLeft: '20px'
-  }
 
+
+// Style variables
 const ITEM_HEIGHT = 48;
 const ITEM_PADDING_TOP = 8;
 const MenuProps = {
@@ -106,9 +105,14 @@ PaperProps: {
 },
 };
 
+// Function to get props for number input customizations, (Adds a dollar sign for price)
+NumberFormatCustom.propTypes = {
+    inputRef: PropTypes.func.isRequired,
+    name: PropTypes.string.isRequired,
+    onChange: PropTypes.func.isRequired,
+    };
 function NumberFormatCustom(props) {
 const { inputRef, onChange, ...other } = props;
-
 return (
     <NumberFormat
     {...other}
@@ -128,71 +132,64 @@ return (
 );
 }
 
-NumberFormatCustom.propTypes = {
-inputRef: PropTypes.func.isRequired,
-name: PropTypes.string.isRequired,
-onChange: PropTypes.func.isRequired,
-};
+
 
   
 
-
+// Functional component for Ledger Form
 function LedgerForm(props) {
+    // Prop constant destruction
     const { onClose, selectedValue, open } = props;
+
+    // Style + Theme constants
     const classes = useStyles();
     const theme = useTheme();
+    // State variables for form inputs
     const [personName, setPersonName] = React.useState([]);
-
     const [dateValue, setDateValue] = React.useState(new Date());
     const [values,setValues] = React.useState({
         numberformat: '1320',
     })
-
     const [nameValue, setNameValue] = React.useState("")
     const [descValue, setDescValue] = React.useState("")
     const [priceValue,setPriceValue] = React.useState()
     
-    
+    // Function to close form on outer click or submit button
     const handleClose = () => {
         onClose(selectedValue);
       };
 
+    // Gets and sets payees name input
     const handleChange = (event) => {
         setPersonName(event.target.value);
-        console.log(event.target.value)
       };
   
+    // Gets and sets date input
     const handleDateChange = (date) => {
-        console.log(date);
         setDateValue(date);
 
       
     };
 
+    // Gets and sets item name input
     const handleNameChange = e =>{
         setNameValue(e.target.value);
-        console.log(e.target.value)
 
     }
 
+    // Gets and sets description input
     const handleDescChange = e =>{
         setDescValue(e.target.value);
-        console.log(e.target.value)
 
     }
+    // Gets and sets price input
     const handlePriceChange = e =>{
         setPriceValue(e.target.value);
-        console.log(e.target.value)
 
     }
 
+    // Handles form submission + saving inputs in financesData array
     const buttonClicked = () =>{
-        console.log(nameValue)
-        console.log(descValue)
-        console.log(priceValue)
-        console.log(dateValue)
-        console.log(personName)
-        console.log(financesData.length)
         handleClose()
 
         const monthNames = ["January", "February", "March", "April", "May", "June",
@@ -216,10 +213,14 @@ function LedgerForm(props) {
 
     }
   
+    // Return value for Form Component
     return (
+
+        // Dialog box
         <Dialog  onClose={handleClose} aria-labelledby="simple-dialog-title" open={open}>
             <DialogTitle id="simple-dialog-title">Add to Ledger</DialogTitle>
             <MuiPickersUtilsProvider utils={DateFnsUtils}>
+                {/* Form name grid component */}
                 <Grid container justify="center">
                     <TextField
                     id="outlined-filled-basic-static" 
@@ -234,6 +235,7 @@ function LedgerForm(props) {
                 <Grid container justify="center">
 
 
+                {/* Form desc grid component */}
                 <Grid container justify="center">
 
                     <TextField
@@ -252,6 +254,7 @@ function LedgerForm(props) {
                 </Grid>
 
 
+                {/* Form date grid component */}
                 <Grid  container justify="center">
 
                     <KeyboardDatePicker
@@ -272,7 +275,7 @@ function LedgerForm(props) {
                 
                 </Grid>
 
-
+                {/* Form price grid component */}
                 <Grid container justify="center">
 
                     <TextField
@@ -287,15 +290,10 @@ function LedgerForm(props) {
                     inputComponent: NumberFormatCustom,
                     }}
                     />
-
                     <br></br>
-                    
-
                 </Grid>
-
+                {/* Form payees picker grid component */}
                 <Grid container justify="center">
-
-
                     <FormControl style={multPickerStyle} className={classes.formControl}>
                     <InputLabel
                     style={{
@@ -330,9 +328,9 @@ function LedgerForm(props) {
                     ))}
                     </Select>
                     </FormControl>
-
                 </Grid>
 
+                {/* Form submit button grid component */}
                 <Grid container justify="center">
 
                     <br></br>

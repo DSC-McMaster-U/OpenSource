@@ -1,31 +1,20 @@
 import React, { useState } from 'react';
-import { spacing } from '@material-ui/system';
 import { makeStyles, useTheme,withStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
 import Grid from '@material-ui/core/Grid';
 import {
     MuiPickersUtilsProvider,
-    KeyboardTimePicker,
     KeyboardDatePicker,
   } from '@material-ui/pickers';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import Dialog from '@material-ui/core/Dialog';
 import DateFnsUtils from '@date-io/date-fns';
 import PropTypes from 'prop-types';
-import MaskedInput from 'react-text-mask';
 import NumberFormat from 'react-number-format';
-import Input from '@material-ui/core/Input';
-import InputLabel from '@material-ui/core/InputLabel';
-import MenuItem from '@material-ui/core/MenuItem';
-import Select from '@material-ui/core/Select';
-import Chip from '@material-ui/core/Chip';
-import ListItemText from '@material-ui/core/ListItemText';
-import FormControl from '@material-ui/core/FormControl';
 import Button from '@material-ui/core/Button';
-import financesData from '../ledger/dummyData'
 import shoppingListData from './dummyData'
 
-
+// Style Variable for Button
 const StyledButton = withStyles({
     root: {
       '&:hover':{
@@ -38,24 +27,8 @@ const StyledButton = withStyles({
     }
   })(Button);
 
-const names = [
-  "Ahmed",
-  "Mo",
-  "Pogba",
-  "Drake",
-  "Pascal",
-  "Jiminy Cricket",
-  "Bernie"
-  ];
 
-function getStyles(name, personName, theme) {
-return {
-    fontWeight:
-    personName.indexOf(name) === -1
-        ? theme.typography.fontWeightRegular
-        : theme.typography.fontWeightMedium,
-};
-}
+// Style function for form
 const useStyles = makeStyles((theme) => ({
     formControl: {
       margin: theme.spacing(1),
@@ -74,27 +47,16 @@ const useStyles = makeStyles((theme) => ({
     },
   }));
 
-const multPickerStyle={
-    backgroundColor:'#DEDEDE',
-    borderRadius:'3px',
-    width:"190px",
-}
-
+// Style function for date picker 
 const datePickerStyle={
     backgroundColor:'#DEDEDE',
     borderRadius: '3px',
     padding: '15px',
     width:'170px'
 }
-const style={
-    width:'300px',
-    textAlign: 'center',
-    justifyContent: 'center',
-    alignItems: 'center',
-    border: '1px solid black',
-    paddingLeft: '20px'
-  }
 
+
+// Style variables
 const ITEM_HEIGHT = 48;
 const ITEM_PADDING_TOP = 8;
 const MenuProps = {
@@ -106,10 +68,14 @@ PaperProps: {
     },
 },
 };
-
+// Function to get props for number input customizations, (Adds a dollar sign for price)
 function NumberFormatCustom(props) {
 const { inputRef, onChange, ...other } = props;
-
+NumberFormatCustom.propTypes = {
+  inputRef: PropTypes.func.isRequired,
+  name: PropTypes.string.isRequired,
+  onChange: PropTypes.func.isRequired,
+  };  
 return (
     <NumberFormat
     {...other}
@@ -129,64 +95,53 @@ return (
 );
 }
 
-NumberFormatCustom.propTypes = {
-inputRef: PropTypes.func.isRequired,
-name: PropTypes.string.isRequired,
-onChange: PropTypes.func.isRequired,
-};
 
-  
-
+// Functional component for Shopping Form
 
 function ShoppingListForm(props) {
+    // Prop constant destruction
     const { onClose, selectedValue, open } = props;
+
+    // Style + Theme constants
     const classes = useStyles();
     const theme = useTheme();
-    const [personName, setPersonName] = React.useState([]);
 
+    // State variables for form inputs
+    const [personName, setPersonName] = React.useState([]);
     const [dateValue, setDateValue] = React.useState(new Date());
     const [values,setValues] = React.useState({
         numberformat: '1320',
     })
-
     const [nameValue, setNameValue] = React.useState("")
     const [descValue, setDescValue] = React.useState("")
     const [priceValue,setPriceValue] = React.useState()
     
-    
+    // Function to close form on outer click or submit button
     const handleClose = () => {
         onClose(selectedValue);
       };
 
-    const handleChange = (event) => {
-        setPersonName(event.target.value);
-        console.log(event.target.value)
-      };
-  
+    // Gets and sets date input
     const handleDateChange = (date) => {
         console.log(date);
         setDateValue(date);
-
       
     };
 
+    // Gets and sets item name input
     const handleNameChange = e =>{
         setNameValue(e.target.value);
         console.log(e.target.value)
 
     }
-
+    // Gets and sets description input
     const handleDescChange = e =>{
         setDescValue(e.target.value);
         console.log(e.target.value)
 
     }
-    const handlePriceChange = e =>{
-        setPriceValue(e.target.value);
-        console.log(e.target.value)
 
-    }
-
+    // Handles form submission + saving inputs in shoppingListData array
     const buttonClicked = () =>{
         handleClose()
 
@@ -205,19 +160,15 @@ function ShoppingListForm(props) {
             
             }
         )
-
-
-        console.log(shoppingListData)
-
-        
-
-
     }
   
+    // Return value for Form Component
     return (
+        // Dialog box
         <Dialog  onClose={handleClose} aria-labelledby="simple-dialog-title" open={open}>
             <DialogTitle id="simple-dialog-title">Add to Shopping List</DialogTitle>
             <MuiPickersUtilsProvider utils={DateFnsUtils}>
+                {/* Form name grid component */}                
                 <Grid container justify="center">
                     <TextField
                     id="outlined-filled-basic-static" 
@@ -232,6 +183,7 @@ function ShoppingListForm(props) {
                 <Grid container justify="center">
 
 
+                {/* Form desc grid component */}
                 <Grid container justify="center">
 
                     <TextField
@@ -249,7 +201,7 @@ function ShoppingListForm(props) {
 
                 </Grid>
 
-
+                {/* Form date grid component */}
                 <Grid  container justify="center">
 
                     <KeyboardDatePicker
@@ -273,7 +225,7 @@ function ShoppingListForm(props) {
 
                 
 
-
+                {/* Form submit button grid component */}
                 <Grid container justify="center">
 
                     <br></br>

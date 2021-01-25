@@ -34,5 +34,15 @@ const financesData = [
     },
 
 ]
+const userData = [
+    "Ahmed",
+    "Mo",
+    "Pogba",
+    "Drake",
+    "Pascal",
+    "Jiminy Cricket",
+    "Bernie"
+  ];
 
+export {userData};
 export default financesData;
