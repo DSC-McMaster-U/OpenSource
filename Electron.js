@@ -1,5 +1,6 @@
 const devMode = require('electron-is-dev')
 const {app, BrowserWindow} = require('electron')
+const url = require('url')
 
 //set the location of the index.html file based on production/development environment
 let indexURL = devMode ?
