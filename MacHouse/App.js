@@ -1,9 +1,10 @@
-import React from 'react';
-import { StatusBar } from "expo-status-bar";
-import { StyleSheet, Text, SafeAreaView, StatusBar } from 'react-native';
+import React from "react";
+// import { StatusBar } from "expo-status-bar";
+import { StyleSheet, Text, SafeAreaView, StatusBar } from "react-native";
 import { DefaultTheme, Provider as PaperProvider } from "react-native-paper";
-import Calendar from './screens/Calendar';
+import Calendar from "./screens/Calendar";
 import ChatScreen from "./screens/chatScreen";
+import Management from "./screens/Management";
 
 const theme = {
   ...DefaultTheme,
@@ -16,17 +17,19 @@ const theme = {
 };
 
 export default function App() {
-	return <Calendar></Calendar>;
-  return <ChatScreen />;
-  <PaperProvider theme={theme}>
+  // return <Calendar></Calendar>;
+  // return <ChatScreen />;
+
+  return (
+    <PaperProvider theme={theme}>
       <Management />
-  </PaperProvider>
+    </PaperProvider>
+  );
 }
 
 const styles = StyleSheet.create({
-	container: {
-		backgroundColor: '#fff',
-	},
+  container: {
+    backgroundColor: "#fff",
+  },
 });
-export default App;
-
+// export default App;
